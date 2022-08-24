@@ -1,0 +1,71 @@
+Category,Room Type,People Rate,Area Rate,Density/100m^2,Total People Rate (lps/person)
+Correctional Facilities,Cell,2.5,0.6,25,4.9
+Correctional Facilities,Dayroom,2.5,0.3,30,3.5
+Correctional Facilities,Guard Stations,2.5,0.3,15,4.5
+Correctional Facilities,Booking/Waiting,3.8,0.3,50,4.4
+Educational Facilities,Day Care (through Age 4),5,0.9,25,8.6
+Educational Facilities,Day Care Sickroom,5,0.9,25,8.6
+Educational Facilities,Classrooms (Ages5-8),5,0.6,25,7.4
+Educational Facilities,Classrooms (Ages 9+),5,0.6,35,6.7
+Educational Facilities,Lecture Classroom,3.8,0.3,65,4.3
+Educational Facilities,Lecture Hall (Fixed Seats),3.8,0.3,150,4
+Educational Facilities,Art Classroom,5,0.9,20,9.5
+Educational Facilities,Science Laboratories,5,0.9,25,8.6
+Educational Facilities,Universtiy/College Lab,5,0.9,25,8.6
+Educational Facilities,Wood/Metal Shop,5,0.9,20,9.5
+Educational Facilities,Computer Lab,5,0.6,25,7.4
+Educational Facilities,Media Center,5,0.6,25,7.4
+Educational Facilities,Music/Theater/Dance,5,0.3,35,5.9
+Educational Facilities,Multiuse Assembly,3.8,0.3,100,4.1
+Educational Facilities,Libraries,2.5,0.6,10,8.5
+Food and Beverage Service,Restaurant Dining Rooms,3.8,0.9,70,5.1
+Food and Beverage Service,Cafeteria/Fast-Food Dining,3.8,0.9,100,4.7
+Food and Beverage Service,Bars Cocktail Lounges,3.8,0.9,100,4.7
+General,Break Rooms,2.5,0.3,25,3.7
+General,Coffee Stations,2.5,0.3,20,4
+General,Conference/Meeting,2.5,0.3,50,3.1
+"Hotels, Motels, Resorts, Dormitories",Bedroom/Living Area,2.5,0.3,10,5.5
+"Hotels, Motels, Resorts, Dormitories",Barracks Sleeping Areas,2.5,0.3,20,4
+"Hotels, Motels, Resorts, Dormitories","Laundry Rooms, Central",2.5,0.6,10,8.5
+"Hotels, Motels, Resorts, Dormitories",Laundry Within Dwelling,2.5,0.6,10,8.5
+"Hotels, Motels, Resorts, Dormitories",Lobbies/Prefunction,3.8,0.3,30,4.8
+"Hotels, Motels, Resorts, Dormitories",Multipurpose Assembly,2.5,0.3,120,2.8
+Office Buildings,Office Space,2.5,0.3,5,8.5
+Office Buildings,Reception Areas,2.5,0.3,30,3.5
+Office Buildings,Telephone/Data Entry,2.5,0.3,60,3
+Office Buildings,Main Entry/Lobbies,2.5,0.3,10,5.5
+Office Buildings,Breakrooms,2.5,0.6,50,3.7
+Miscellaneous Spaces,Bank Vaults/Safe Deposit,2.5,0.3,5,8.5
+Miscellaneous Spaces,Computer (Not Printing),2.5,0.3,4,10
+Miscellaneous Spaces,Pharmacy (Preparation Area),2.5,0.9,10,11.5
+Miscellaneous Spaces,Photo Studios,2.5,0.6,10,8.5
+Miscellaneous Spaces,Transportation Waiting,3.8,0.3,100,4.1
+Miscellaneous Spaces,Banks or bank lobbies,3.8,0.3,15,5.8
+Miscellaneous Spaces,"Manufacturing, no hazardous materials",5,0.9,7,17.9
+Miscellaneous Spaces,"Manufacturing, hazardous materials",5,0.9,7,17.9
+Miscellaneous Spaces,Shipping and Receiving,5,0.6,2,35
+Miscellaneous Spaces,"Sorting, packing, light assembly",3.8,0.6,7,12.4
+Public Assembly Spaces,Auditorium Seating Area,2.5,0.3,150,2.7
+Public Assembly Spaces,Place of Religious Worship,2.5,0.3,120,2.8
+Public Assembly Spaces,Coutrooms,2.5,0.3,70,2.9
+Public Assembly Spaces,Legislative Chambers,2.5,0.3,50,3.1
+Public Assembly Spaces,Libraries,2.5,0.6,10,8.5
+Public Assembly Spaces,Lobbies,2.5,0.3,150,2.7
+Public Assembly Spaces,Museums (Children's),3.8,0.6,40,5.3
+Public Assembly Spaces,Museum/Galleries,3.8,0.3,40,4.6
+Retail,Sales (except below),3.8,0.6,15,7.8
+Retail,Mall Common Areas,3.8,0.3,40,4.6
+Retail,Barbershop,3.8,0.3,25,5
+Retail,Beauty and Nail Salons,10,0.6,25,12.4
+Retail,Pet Shops (Animal Areas),3.8,0.9,10,12.8
+Retail,Supermarket,3.8,0.3,8,7.6
+Retail,Coin-operated Laundries,3.8,0.6,20,6.8
+Sports and Entertainment,Spectator Areas,3.8,0.3,150,4
+Sports and Entertainment,Disco/Dance Floors,10,0.3,100,10.3
+Sports and Entertainment,Health Clubs/Aerobics Room,10,0.3,40,10.8
+Sports and Entertainment,Health Clubs/Weight Room,10,0.3,10,13
+Sports and Entertainment,Bowling Alley (Seating),5,0.6,40,6.5
+Sports and Entertainment,Gambling Casinos,3.8,0.9,120,4.6
+Sports and Entertainment,Game Arcades,3.8,0.9,20,8.3
+Sports and Entertainment,"Stages, Studios",5,0.3,70,5.4
+Sports and Entertainment,"Gym, sports arena",10,0.9,7,22.9
