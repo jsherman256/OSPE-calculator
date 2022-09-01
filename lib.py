@@ -16,8 +16,13 @@ vent = (
 )
 co2_gen = (
     pd
-    .read_csv('CO2_Generation.csv', header=[0,1], index_col=0)
+    .read_csv('CO2_Generation.csv', index_col=0)
     .applymap(lambda x: x / 10000)
+)
+co2_gen.columns = co2_gen.columns.astype(float)
+activities = (
+    pd
+    .read_csv('Activity-Met.csv', index_col=0)
 )
 
 def display(max_co2):

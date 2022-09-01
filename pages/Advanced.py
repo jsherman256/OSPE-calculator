@@ -19,18 +19,21 @@ with left:
 with center:
     age = st.selectbox(label="Average Age", options=co2_gen.index)
 with right:
-    met = st.selectbox(label="Metabolic Rate", options=[m[1] for m in co2_gen.columns if m[0] == 'Met'])
+    activity = st.selectbox(label="Activity", options=activities.index)
+
+# Look up Met
+met = activities.loc[activity].Met
 
 # Do calculations
 vent_params = vent.loc[room]
 vent_needed = (vent_params['People Rate'] * people) + (vent_params['Area Rate'] * room_size)
 
-co2_created = co2_gen.loc[age][('Met', met)] * people
+co2_created = co2_gen.loc[age][met] * people
 max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
 with st.expander(label='Debug output'):
     st.latex(f"vent = {vent_needed} = ({vent_params['People Rate']} \\cdot {people}) + ({vent_params['Area Rate']} \\cdot {room_size})")
-    st.latex(f"co2_{{gen}} = {co2_created} = {co2_gen.loc[age][('Met', met)]} \\cdot {people}")
+    st.latex(f"co2_{{gen}} = {co2_created} = {co2_gen.loc[age][met]} \\cdot {people}")
     st.latex(f"co2_{{max}} = {max_co2} = {outdoor_co2} + \\frac{{{co2_created} \\cdot 1000000}}{{{vent_needed}}}")
 
 display(max_co2)

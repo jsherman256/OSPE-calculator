@@ -11,11 +11,14 @@ left, right = st.columns(2)
 with left:
     age = st.selectbox(label="Average Age", options=co2_gen.index)
 with right:
-    met = st.selectbox(label="Metabolic Rate", options=[m[1] for m in co2_gen.columns if m[0] == 'Met'])
+    activity = st.selectbox(label="Activity", options=activities.index)
+
+# Look up Met from activity
+met = activities.loc[activity].Met
 
 # Do calculations
 vent_per_capita = vent.loc[room]['Total People Rate (lps/person)']
-co2_per_capita = co2_gen.loc[age][('Met', met)]
+co2_per_capita = co2_gen.loc[age][met]
 max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
 
 with st.expander("Debug output"):
