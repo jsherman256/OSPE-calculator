@@ -8,18 +8,18 @@ st.markdown("# OSPE Air Quality Calculator")
 # Room parameters
 left, right = st.columns(2)
 with left:
-    room = st.selectbox(label='Room Type', options=vent.index)
+    room = st.selectbox(label='Room Type', options=vent.index, index=default_room)
 with right:
-    room_size = st.number_input(label='Room Size (sq m)', min_value=1, value=20)
+    room_size = st.number_input(label='Room Size (sq m)', min_value=1, value=75)
 
 # People parameters
 left, center, right = st.columns(3)
 with left:
     people = st.number_input(label="Number Occupants", min_value=1, value=25)
 with center:
-    age = st.selectbox(label="Average Age", options=co2_gen.index)
+    age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)
 with right:
-    activity = st.selectbox(label="Activity", options=activities.index)
+    activity = st.selectbox(label="Activity", options=activities.index, index=default_activity)
 
 # Look up Met
 met = activities.loc[activity].Met

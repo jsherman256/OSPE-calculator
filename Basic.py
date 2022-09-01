@@ -6,12 +6,12 @@ st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 st.markdown("# OSPE Air Quality Calculator")
 
 # Create UI input elements
-room = st.selectbox(label='Room Type', options=vent.index)
+room = st.selectbox(label='Room Type', options=vent.index, index=default_room)
 left, right = st.columns(2)
 with left:
-    age = st.selectbox(label="Average Age", options=co2_gen.index)
+    age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)
 with right:
-    activity = st.selectbox(label="Activity", options=activities.index)
+    activity = st.selectbox(label="Activity", options=activities.index, index=default_activity)
 
 # Look up Met from activity
 met = activities.loc[activity].Met

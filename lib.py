@@ -25,6 +25,11 @@ activities = (
     .read_csv('Activity-Met.csv', index_col=0)
 )
 
+# Look up the ordinal index for the default selectbox values
+default_room = vent.index.get_loc("Educational Facilities - Classrooms (Ages 9+)")
+default_age = co2_gen.index.get_loc("6 to <11")
+default_activity = activities.index.get_loc("Sitting tasks, light effort (office work)")
+
 def display(max_co2):
     st.markdown('---')
 
