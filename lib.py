@@ -31,7 +31,5 @@ default_age = co2_gen.index.get_loc("6 to <11")
 default_activity = activities.index.get_loc("Sitting tasks, light effort (office work)")
 
 def display(max_co2):
-    st.markdown('---')
-
     st.markdown(f"<center><span style='font-size:80px;'>Maximum CO2</style></center>", unsafe_allow_html=True)
     st.markdown(f"<center><span style='font-size:250px;'>{int(max_co2)}</style></center>", unsafe_allow_html=True)
