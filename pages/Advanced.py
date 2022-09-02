@@ -31,9 +31,9 @@ vent_needed = (vent_params['People Rate'] * people) + (vent_params['Area Rate'] 
 co2_created = co2_gen.loc[age][met] * people
 max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
-with st.expander(label='Debug output'):
+with st.expander(label='More info'):
     st.latex(f"vent = {vent_needed} = ({vent_params['People Rate']} \\cdot {people}) + ({vent_params['Area Rate']} \\cdot {room_size})")
     st.latex(f"co2_{{gen}} = {co2_created} = {co2_gen.loc[age][met]} \\cdot {people}")
-    st.latex(f"co2_{{max}} = {max_co2} = {outdoor_co2} + \\frac{{{co2_created} \\cdot 1000000}}{{{vent_needed}}}")
+    st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{{co2_created} \\cdot 1000000}}{{{vent_needed}}}")
 
 display(max_co2)

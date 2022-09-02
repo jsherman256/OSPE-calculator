@@ -21,14 +21,9 @@ vent_per_capita = vent.loc[room]['Total People Rate (lps/person)']
 co2_per_capita = co2_gen.loc[age][met]
 max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
 
-with st.expander("Debug output"):
-    # Debug output
-    st.code(f"""
-    Room needs {vent_per_capita} lps/person.
-Age "{age}" @ met {met} produces {co2_per_capita} lps/person of CO2
-Max CO2: {int(max_co2)}
-    """)
-
-    st.latex(f"{outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 1000000}} {{ {vent_per_capita} }} = {max_co2}")
+with st.expander("More info"):
+    st.latex(f"vent = {vent_per_capita}")
+    st.latex(f"co2_{{gen}} = {co2_per_capita}")
+    st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 1000000}} {{ {vent_per_capita} }}")
 
 display(max_co2)
