@@ -3,11 +3,11 @@ from lib import *
 
 st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 
-st.markdown("# OSPE Air Quality Calculator")
+form_container = st.empty()
 
-submitted = False
+with form_container.container():
+    st.markdown("# OSPE Air Quality Calculator")
 
-with st.form('Basic') as form:
     # Create UI input elements
     room = st.selectbox(label='Room Type', options=vent.index, index=default_room)
     left, right = st.columns(2)
@@ -15,9 +15,7 @@ with st.form('Basic') as form:
         age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)
     with right:
         activity = st.selectbox(label="Activity", options=activities.index, index=default_activity)
-    submitted = st.form_submit_button('Calculate')
 
-if submitted:
     # Look up Met from activity
     met = activities.loc[activity].Met
 
@@ -31,4 +29,9 @@ if submitted:
         st.latex(f"co2_{{gen}} = {co2_per_capita}")
         st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 1000000}} {{ {vent_per_capita} }}")
 
+    submitted = st.button('Print')
+
+if submitted:
+    form_container.empty()
     display(max_co2)
+    st.markdown("Press R to do a new calculation")
