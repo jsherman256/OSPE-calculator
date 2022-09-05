@@ -7,6 +7,9 @@ form_container = st.empty()
 
 with form_container.container():
     st.markdown("# OSPE Air Quality Calculator")
+    st.markdown("## CO2 Limit - Basic")
+    st.markdown("Find the maximum CO2 level for an ASHRAE-compliant room.")
+    st.markdown("---")
 
     # Create UI input elements
     room = st.selectbox(label='Room Type', options=vent.index, index=default_room)

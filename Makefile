@@ -1,5 +1,5 @@
 run: build
-	venv/bin/streamlit run Basic.py
+	venv/bin/streamlit run "CO2 Limit - Basic.py"
 
 venv:
 	python3 -m venv venv

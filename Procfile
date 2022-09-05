@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run Basic.py
+web: sh setup.sh && streamlit run "CO2 Limit - Basic.py"
