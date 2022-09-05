@@ -33,4 +33,4 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display(max_co2)
+    display(max_co2, room)
