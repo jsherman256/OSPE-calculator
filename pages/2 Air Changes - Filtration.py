@@ -40,6 +40,8 @@ elif volume_unit == 'cubic feet':
 
 # This *should* always be true, but best to double check
 if volume_m3 > 0:
+    with st.expander("More info"):
+        st.latex(f"\\frac{{{max_cadr_m3ph} \\frac{{m^3}}{{h}}}}{{{volume_m3} m^3}}")
     ach = max_cadr_m3ph / volume_m3
 
     # If ACH is within ±0.1 of an integer, just show the integer portion
