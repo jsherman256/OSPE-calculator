@@ -12,17 +12,17 @@ st.markdown("Find the number of air changes per hour provided by an air purifier
 st.markdown("---")
 
 # Room parameters
-left, right = st.columns([2,1])
+left, right = st.columns([1,1])
 with left:
-    max_cadr = st.number_input(label='Clear Air Delivery Rate (CADR)', step=1, min_value=1)
+    max_cadr = st.number_input(label='Clear Air Delivery Rate (CADR)', step=1, min_value=1, value=250)
 with right:
     cadr_unit = st.selectbox(label="CADR Unit", options=['CFM', 'lps', 'm^3/h'])
 
-left, right = st.columns([2,1])
+left, right = st.columns([1,1])
 with left:
-    room_volume = st.number_input(label='Room Volume', step=1, min_value=1)
+    room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=75)
 with right:
-    volume_unit = st.selectbox(label='Volume Unit', options=['cubic feet', 'cubic meters'])
+    volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
 
 # Convert CADR to cubic meters per hour (if necessary)
 if cadr_unit == 'm^3/h':
@@ -46,4 +46,4 @@ if volume_m3 > 0:
     # Otherwise, round to the nearest 0.1
     ach = int(ach) if (abs(int(ach) - ach) < .1) else round(ach, 1)
 
-    st.write(f"# {ach} ACH")
+    st.markdown(f"<center><h1>{ach} ACH</h1></center>", unsafe_allow_html=True)
