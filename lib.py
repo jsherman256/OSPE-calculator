@@ -44,11 +44,11 @@ def display_ach(ach):
     # Otherwise, round to the nearest 0.1
     ach = int(ach) if (abs(int(ach) - ach) < .1) else round(ach, 1)
 
-    if ach > 12:
+    if ach >= 12:
         rating = "Excellent!"
-    if ach < 12 and ach > 6:
+    if ach < 12 and ach >= 6:
         rating = "Good"
-    if ach < 6 and ach > 4:
+    if ach < 6 and ach >= 4:
         rating = "Ok"
     if ach < 4:
         rating = "Poor"
