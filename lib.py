@@ -38,3 +38,21 @@ def display(max_co2, room_type):
 
     if rerun:
         st.experimental_rerun()
+
+def display_ach(ach):
+    # If ACH is within ±0.1 of an integer, just show the integer portion
+    # Otherwise, round to the nearest 0.1
+    ach = int(ach) if (abs(int(ach) - ach) < .1) else round(ach, 1)
+
+    if ach > 12:
+        rating = "Excellent!"
+    if ach < 12 and ach > 6:
+        rating = "Good"
+    if ach < 6 and ach > 4:
+        rating = "Ok"
+    if ach < 4:
+        rating = "Poor"
+
+    st.markdown(f"<center><h1>{ach} ACH</h1></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><h1>{rating}</h1></center>", unsafe_allow_html=True)
+    

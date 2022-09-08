@@ -43,9 +43,4 @@ if volume_m3 > 0:
     with st.expander("More info"):
         st.latex(f"\\frac{{{max_cadr_m3ph} \\frac{{m^3}}{{h}}}}{{{volume_m3} m^3}}")
     ach = max_cadr_m3ph / volume_m3
-
-    # If ACH is within ±0.1 of an integer, just show the integer portion
-    # Otherwise, round to the nearest 0.1
-    ach = int(ach) if (abs(int(ach) - ach) < .1) else round(ach, 1)
-
-    st.markdown(f"<center><h1>{ach} ACH</h1></center>", unsafe_allow_html=True)
+    display_ach(ach)
