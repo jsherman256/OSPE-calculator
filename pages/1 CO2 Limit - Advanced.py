@@ -41,7 +41,7 @@ with form_container.container():
     with st.expander(label='More info'):
         st.latex(f"vent = {vent_needed} = ({vent_params['People Rate']} \\cdot {people}) + ({vent_params['Area Rate']} \\cdot {room_size})")
         st.latex(f"co2_{{gen}} = {co2_created} = {co2_gen.loc[age][met]} \\cdot {people}")
-        st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{{co2_created} \\cdot 1000000}}{{{vent_needed}}}")
+        st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{{co2_created} \\cdot 10^6}}{{{vent_needed}}}")
 
     submitted = st.button('Print')
 

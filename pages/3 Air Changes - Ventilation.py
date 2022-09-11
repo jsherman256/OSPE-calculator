@@ -52,7 +52,7 @@ if volume_m3 > 0 and indoor_co2 > outdoor_co2_actual:
 
     with st.expander("More info"):
         st.latex(f"co2_{{\\text{{per capita}}}} = {co2_gen.loc[age][met]}\\text{{ L/s}}")
-        st.latex(f"vent_{{\\text{{per capita}}}} = \\frac{{{co2_per_capita} \\cdot 1000000}}{{{indoor_co2} - {outdoor_co2_actual}}} = {round(vent_per_capita, 1)}\\text{{ L/s}}")
+        st.latex(f"vent_{{\\text{{per capita}}}} = \\frac{{{co2_per_capita} \\cdot 10^6}}{{{indoor_co2} - {outdoor_co2_actual}}} = {round(vent_per_capita, 1)}\\text{{ L/s}}")
         st.latex(f"vent_{{total}} = {round(vent_per_capita, 1)} \\cdot {people} = {round(total_vent_lps, 1)}\\text{{ L/s}}")
         st.latex(f"ACH = 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}}}{{{round(volume_m3, 1)}m^3}} = {round(ach, 1)}")
 

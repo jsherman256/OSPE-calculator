@@ -30,7 +30,7 @@ with form_container.container():
     with st.expander("More info"):
         st.latex(f"vent = {vent_per_capita}")
         st.latex(f"co2_{{gen}} = {co2_per_capita}")
-        st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 1000000}} {{ {vent_per_capita} }}")
+        st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 10^6}} {{ {vent_per_capita} }}")
 
     submitted = st.button('Print')
 
