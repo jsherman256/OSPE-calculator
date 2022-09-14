@@ -51,9 +51,9 @@ if volume_m3 > 0 and indoor_co2 > outdoor_co2_actual:
     ach = 3.6 * total_vent_lps / volume_m3
 
     with st.expander("More info"):
-        st.latex(f"co2_{{\\text{{per capita}}}} = {co2_gen.loc[age][met]}\\text{{ L/s}}")
-        st.latex(f"vent_{{\\text{{per capita}}}} = \\frac{{{co2_per_capita} \\cdot 10^6}}{{{indoor_co2} - {outdoor_co2_actual}}} = {round(vent_per_capita, 1)}\\text{{ L/s}}")
-        st.latex(f"vent_{{total}} = {round(vent_per_capita, 1)} \\cdot {people} = {round(total_vent_lps, 1)}\\text{{ L/s}}")
-        st.latex(f"ACH = 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}}}{{{round(volume_m3, 1)}m^3}} = {round(ach, 1)}")
+        st.latex(f"co2_{{\\text{{per capita}}}} = {co2_gen.loc[age][met]}\\text{{ L/s/p}}")
+        st.latex(f"vent_{{\\text{{per capita}}}} = {round(vent_per_capita, 1)}\\text{{ L/s/p}} = \\frac{{{co2_per_capita} \\cdot 10^6 \\text{{ L/s/p}}}}{{{indoor_co2}\\text{{ ppm}} - {outdoor_co2_actual}\\text{{ ppm}}}}")
+        st.latex(f"vent_{{total}} = {round(total_vent_lps, 1)}\\text{{ L/s}} = {round(vent_per_capita, 1)}\\text{{ L/s/p}} \\cdot {people}\\text{{ people}}")
+        st.latex(f"ACH = {round(ach, 2)} = 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}\\text{{ L/s}}}}{{{round(volume_m3, 1)}m^3}}")
 
     display_ach(ach)

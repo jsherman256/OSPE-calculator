@@ -28,9 +28,9 @@ with form_container.container():
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
 
     with st.expander("More info"):
-        st.latex(f"vent = {vent_per_capita}")
-        st.latex(f"co2_{{gen}} = {co2_per_capita}")
-        st.latex(f"co2_{{max}} = {int(max_co2)} = {outdoor_co2} + \\frac{{ {co2_per_capita} \\cdot 10^6}} {{ {vent_per_capita} }}")
+        st.latex(f"vent_{{\\text{{per capita}}}} = {vent_per_capita}\\text{{ L/s/p}}")
+        st.latex(f"co2_{{gen}} = {co2_per_capita}\\text{{ L/s/p}}")
+        st.latex(f"co2_{{max}} = {int(max_co2)}\\text{{ ppm}} = {outdoor_co2}\\text{{ ppm}} + \\frac{{ {co2_per_capita} \\cdot 10^6 \\text{{ L/s/p}}}} {{ {vent_per_capita}  \\text{{ L/s/p}}}}")
 
     submitted = st.button('Print')
 
