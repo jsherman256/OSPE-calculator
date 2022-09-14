@@ -12,7 +12,10 @@ with form_container.container():
     st.markdown("---")
 
     # Create UI input elements
+    st.markdown("### Room")
     room = st.selectbox(label='Room Type', options=vent.index, index=default_room)
+
+    st.markdown("### People")
     left, right = st.columns(2)
     with left:
         age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)

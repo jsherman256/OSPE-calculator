@@ -11,18 +11,21 @@ st.markdown("## Air Changes from Filtration")
 st.markdown("Find the number of air changes per hour provided by an air purifier.")
 st.markdown("---")
 
+st.markdown("### Room")
 # Room parameters
+left, right = st.columns([1,1])
+with left:
+    room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=200)
+with right:
+    volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
+
+st.markdown("### Filtration")
+# Filtration
 left, right = st.columns([1,1])
 with left:
     max_cadr = st.number_input(label='Clear Air Delivery Rate (CADR)', step=1, min_value=1, value=250)
 with right:
     cadr_unit = st.selectbox(label="CADR Unit", options=['CFM', 'lps', 'm^3/h'])
-
-left, right = st.columns([1,1])
-with left:
-    room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=75)
-with right:
-    volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
 
 # Convert CADR to cubic meters per hour (if necessary)
 if cadr_unit == 'm^3/h':
@@ -42,5 +45,5 @@ elif volume_unit == 'cubic feet':
 if volume_m3 > 0:
     ach = max_cadr_m3ph / volume_m3
     with st.expander("More info"):
-        st.latex(f"ACH = {round(ach,2)} = \\frac{{{max_cadr_m3ph} \\frac{{m^3}}{{h}}}}{{{volume_m3} m^3}}")
+        st.latex(f"ACH = {round(ach,2)} = \\frac{{{round(max_cadr_m3ph,2)} \\frac{{m^3}}{{h}}}}{{{round(volume_m3,2)} m^3}}")
     display_ach(ach)

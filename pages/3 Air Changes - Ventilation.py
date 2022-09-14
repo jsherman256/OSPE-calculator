@@ -10,25 +10,30 @@ st.markdown("## Air Changes from Ventilation")
 st.markdown("Estimate the number of outdoor air changes based on indoor CO2 levels.")
 st.markdown("---")
 
+st.markdown("### Room")
 # Room parameters
-outdoor, indoor, vol, vol_u = st.columns(4)
-with outdoor:
-    outdoor_co2_actual = st.number_input(label='Outdoor CO2', step=5, min_value=350, value=outdoor_co2)
-with indoor:
-    indoor_co2 = st.number_input(label='Steady-State Indoor CO2', step=5, min_value=350, value=900)
-with vol:
-    room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=75)
-with vol_u:
-    volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
-
-# People parameters
 left, right = st.columns(2)
 with left:
-    people = st.number_input(label="Number Occupants", min_value=1, value=25)
+    room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=200)
 with right:
-    age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)
+    volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
 
-activity = st.selectbox(label="Activity", options=activities.index, index=default_activity)
+st.markdown("### People")
+# People parameters
+left, center, right = st.columns([1,1,3])
+with left:
+    people = st.number_input(label="Number Occupants", min_value=1, value=25)
+with center:
+    age = st.selectbox(label="Average Age", options=co2_gen.index, index=default_age)
+with right:
+    activity = st.selectbox(label="Activity", options=activities.index, index=default_activity)
+
+st.markdown("### CO₂")
+left, right = st.columns(2)
+with left:
+    outdoor_co2_actual = st.number_input(label='Outdoor CO2', step=5, min_value=350, value=outdoor_co2)
+with right:
+    indoor_co2 = st.number_input(label='Steady-State Indoor CO2', step=5, min_value=350, value=900)
 
 # Convert room volume to cubic meters
 if volume_unit == 'cubic meters':

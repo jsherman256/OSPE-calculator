@@ -12,15 +12,17 @@ with form_container.container():
     st.markdown("Find the maximum CO2 level for an ASHRAE-compliant room.")
     st.markdown("---")
 
+    st.markdown("### Room")
     # Room parameters
-    left, right = st.columns(2)
+    left, right = st.columns([3,1])
     with left:
         room = st.selectbox(label='Room Type', options=vent.index, index=default_room)
     with right:
         room_size = st.number_input(label='Room Size (sq m)', min_value=1, value=75)
 
+    st.markdown("### People")
     # People parameters
-    left, center, right = st.columns(3)
+    left, center, right = st.columns([1,1,3])
     with left:
         people = st.number_input(label="Number Occupants", min_value=1, value=25)
     with center:
@@ -39,9 +41,9 @@ with form_container.container():
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
     with st.expander(label='More info'):
-        st.latex(f"vent_{{total}} = {vent_needed}\\text{{ L/s}} = ({vent_params['People Rate']}\\text{{ L/s}}\\cdot {people}\\text{{ people}}) + ({vent_params['Area Rate']}\\text{{ L/s}} \\cdot {room_size}\\text{{ }}m^2)")
+        st.latex(f"vent_{{total}} = {round(vent_needed,2)}\\text{{ L/s}} = ({vent_params['People Rate']}\\text{{ L/s}}\\cdot {people}\\text{{ people}}) + ({vent_params['Area Rate']}\\text{{ L/s}} \\cdot {room_size}\\text{{ }}m^2)")
         st.latex(f"co2_{{gen}} = {round(co2_created,5)}\\text{{ L/s}} = {co2_gen.loc[age][met]}\\text{{ L/s}} \\cdot {people}\\text{{ people}}")
-        st.latex(f"co2_{{max}} = {int(max_co2)}\\text{{ ppm}} = {outdoor_co2}\\text{{ ppm}} + \\frac{{{round(co2_created, 5)} \\cdot 10^6\\text{{ L/s}}}}{{{vent_needed}\\text{{ L/s}}}}")
+        st.latex(f"co2_{{max}} = {int(max_co2)}\\text{{ ppm}} = {outdoor_co2}\\text{{ ppm}} + \\frac{{{round(co2_created, 5)} \\cdot 10^6\\text{{ L/s}}}}{{{round(vent_needed,2)}\\text{{ L/s}}}}")
 
     submitted = st.button('Print')
 
