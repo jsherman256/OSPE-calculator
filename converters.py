@@ -6,3 +6,6 @@ def cfm_to_cubic_meters_per_hour(cfm):
 
 def cubic_feet_to_cubic_meters(cubic_feet):
     return cubic_feet / 35.315
+
+def cubic_meters_per_hour_to_lps(m3ph):
+    return m3ph / 3.6
