@@ -37,10 +37,13 @@ default_activity = activities.index.get_loc("Sitting tasks, light effort (office
 default_health_age = co2_gen.index.get_loc("30 to <40")
 default_health_activity = activities.index.get_loc("Standing quietly")
 
-def display(max_co2, room_type):
-    st.markdown(f"<center><span style='font-size:80px;'>Maximum CO2</style></center>", unsafe_allow_html=True)
-    st.markdown(f"<center><span style='font-size:250px;'>{int(max_co2)}</style></center>", unsafe_allow_html=True)
+def display(max_co2, room_type, additional=None):
+    st.markdown(f"<center><span style='font-size:70px;'>Maximum CO2</style></center>", unsafe_allow_html=True)
     st.markdown(f"<center><span style='font-size:30px;'>{room_type}</style></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:220px;'>{int(max_co2)}</style></center>", unsafe_allow_html=True)
+    if additional:
+        for key, value in additional.items():
+            st.markdown(f"**{key}**  {value}")
     rerun = st.button('Rerun')
 
     if rerun:

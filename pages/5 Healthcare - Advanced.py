@@ -53,4 +53,7 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display(max_co2, room)
+    additional = {
+        'Required Total Outdoor CADR': f"{vent_needed} L/s",
+    }
+    display(max_co2, room, additional=additional)
