@@ -38,12 +38,23 @@ default_health_age = co2_gen.index.get_loc("30 to <40")
 default_health_activity = activities.index.get_loc("Standing quietly")
 
 def display(max_co2, room_type, additional=None):
-    st.markdown(f"<center><span style='font-size:70px;'>Maximum CO2</style></center>", unsafe_allow_html=True)
-    st.markdown(f"<center><span style='font-size:30px;'>{room_type}</style></center>", unsafe_allow_html=True)
-    st.markdown(f"<center><span style='font-size:220px;'>{int(max_co2)}</style></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:70px;'>Maximum CO2</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:30px;'>{room_type}</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:220px;'>{int(max_co2)}</span></center>", unsafe_allow_html=True)
     if additional:
         for key, value in additional.items():
             st.markdown(f"**{key}**  {value}")
+    rerun = st.button('Rerun')
+
+    if rerun:
+        st.experimental_rerun()
+
+def display_v2(co2, *args):
+    st.markdown(f"<center><span style='font-size:40px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:160px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    for (k,v) in args:
+        st.markdown(f"<span style='font-size:18px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
     rerun = st.button('Rerun')
 
     if rerun:
