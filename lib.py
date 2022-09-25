@@ -50,11 +50,19 @@ def display(max_co2, room_type, additional=None):
         st.experimental_rerun()
 
 def display_v2(co2, *args):
-    st.markdown(f"<center><span style='font-size:40px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
-    st.markdown(f"<center><span style='font-size:160px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:35px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:150px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
     st.markdown("<br><br>", unsafe_allow_html=True)
     for (k,v) in args:
-        st.markdown(f"<span style='font-size:18px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='font-size:20px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
+    st.markdown("""
+    <hr>
+    <span style='font-size:12px;'>
+    This is the expected maximum CO2 level when the room is used as described. 
+    Having higher activity levels could lead to higher CO2 levels. 
+    CO2 sensors can have errors on the order of 50 ppm. 
+    If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with modern ventilation requirements.
+    </span>""", unsafe_allow_html=True)
     rerun = st.button('Rerun')
 
     if rerun:
