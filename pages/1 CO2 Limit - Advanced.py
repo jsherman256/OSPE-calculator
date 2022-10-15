@@ -9,7 +9,7 @@ form_container = st.empty()
 with form_container.container():
     st.markdown("# OSPE Air Quality Calculator")
     st.markdown("## CO2 Limit - Advanced")
-    st.markdown("Find the maximum CO2 level for an ASHRAE-compliant room.")
+    st.markdown("Find the expected steady-state CO2 level for an ASHRAE-compliant room.")
     st.markdown("---")
 
     st.markdown("### Room")
