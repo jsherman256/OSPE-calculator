@@ -1,5 +1,6 @@
 import streamlit as st
 from lib import *
+import units as u
 
 st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 
@@ -40,13 +41,18 @@ with form_container.container():
     co2_created = co2_gen.loc[age][met] * people
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
-    with st.expander(label='More info'):
-        st.latex(f"vent_{{total}} = {round(vent_needed,2)}\\text{{ L/s}} = ({vent_params['People Rate']}\\text{{ L/s}}\\cdot {people}\\text{{ people}}) + ({vent_params['Area Rate']}\\text{{ L/s}} \\cdot {room_size}\\text{{ }}m^2)")
-        st.latex(f"co2_{{gen}} = {round(co2_created,5)}\\text{{ L/s}} = {co2_gen.loc[age][met]}\\text{{ L/s}} \\cdot {people}\\text{{ people}}")
-        st.latex(f"co2_{{max}} = {int(max_co2)}\\text{{ ppm}} = {outdoor_co2}\\text{{ ppm}} + \\frac{{{round(co2_created, 5)} \\cdot 10^6\\text{{ L/s}}}}{{{round(vent_needed,2)}\\text{{ L/s}}}}")
+    st.markdown("### Results")
+    st.markdown(f"""
+    ||||
+    |-|-|-|
+    |**Total outdoor airflow**| $ ({vent_params['People Rate']}{u.lps}\\cdot {people}{u.people}) + ({vent_params['Area Rate']}{u.lps} \\cdot {room_size}{u.sq_m}) $ | $ = {round(vent_needed,2)} {u.lps}$|
+    |**Total CO2 generated**| $ {co2_gen.loc[age][met]}{u.lps_per_person} \\cdot {people}{u.people} $ | $ = {round(co2_created,5)}{u.lps} $ |
+    |**Steady State CO2**| $ {outdoor_co2}{u.ppm} + \\frac{{{round(co2_created, 5)} {u.lps}}}{{{round(vent_needed,2)}{u.lps}}} \\cdot 10^6 $ | $ = {int(max_co2)}{u.ppm} $ |
+    """
+    )
 
     submitted = st.button('Print')
 
 if submitted:
     form_container.empty()
-    display(max_co2, room)
+    display_v2(max_co2, ("Room:", room), ("Average Age:", age), ("Activity:", activity))
