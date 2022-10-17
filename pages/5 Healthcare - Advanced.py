@@ -44,16 +44,21 @@ with form_container.container():
     co2_created = co2_gen.loc[age][met] * people
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
-    with st.expander(label='More info'):
-        st.latex(f"vent_{{total}} = {round(vent_needed,2)}{u.lps} = {outdoor_ach_needed}{u.ach} \\cdot {room_size}{u.sq_m} \\cdot 2.7{u.meter} \\cdot {u.m3ph_over_lps}")
-        st.latex(f"co2_{{gen}} = {round(co2_created,5)}{u.lps} = {co2_gen.loc[age][met]}{u.lps_per_person} \\cdot {int(people)}{u.people}")
-        st.latex(f"co2_{{max}} = {int(max_co2)}{u.ppm} = {outdoor_co2}{u.ppm} + \\left(\\frac{{{round(co2_created, 5)}{u.lps}}}{{{round(vent_needed,2)}{u.lps}}}\\right) \\cdot {u.mega}")
+    st.markdown("### Results")
+    st.markdown(f"""
+    ||||
+    |-|-|-|
+    |**Total outdoor airflow**|${outdoor_ach_needed}{u.ach} \\cdot {room_size}{u.sq_m} \\cdot 2.7{u.meter} \\cdot {u.m3ph_over_lps}$|$= {round(vent_needed,2)}{u.lps}$|
+    |**Total CO2 generated**|${round(co2_gen.loc[age][met], 5)}{u.lps_per_person} \\cdot {int(people)}{u.people}$|$= {round(co2_created, 5)}{u.lps}$|
+    |**Steady State CO2**|${outdoor_co2}{u.ppm} + \\left(\\frac{{{round(co2_created, 5)}{u.lps}}}{{{round(vent_needed, 2)}{u.lps}}}\\right) \\cdot {u.mega}$|$ = {int(max_co2)}{u.ppm}$|
+    """)
 
     submitted = st.button('Print')
 
 if submitted:
     form_container.empty()
-    additional = {
-        'Required Total Outdoor CADR': f"{vent_needed} L/s",
-    }
-    display(max_co2, room, additional=additional)
+    display_v2(
+        max_co2, 
+        ("Room:", room),
+        ("Required Total Outdoor CADR:", f"{vent_needed} L/s")
+    )
