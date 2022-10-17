@@ -1,5 +1,6 @@
 import streamlit as st
 from lib import *
+import units as u
 
 st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 
@@ -31,17 +32,21 @@ with form_container.container():
     co2_per_capita = co2_gen.loc[age][met]
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
 
-    with st.expander("More info"):
-        st.latex(f"vent_{{\\text{{per capita}}}} = {round(vent_per_capita, 2)}\\text{{ L/s/p}}")
-        st.latex(f"co2_{{gen}} = {round(co2_per_capita, 5)}\\text{{ L/s/p}}")
-        st.latex(f"co2_{{max}} = {int(max_co2)}\\text{{ ppm}} = {outdoor_co2}\\text{{ ppm}} + \\frac{{ {round(co2_per_capita, 5)} \\cdot 10^6 \\text{{ L/s/p}}}} {{ {round(vent_per_capita, 2)}  \\text{{ L/s/p}}}}")
-
+    st.markdown("### Results")
+    st.markdown(f"""
+    ||||
+    |-|-|-|
+    |**Outdoor airflow per person**| |$ = {round(vent_per_capita, 2)}{u.lps_per_person}$|
+    |**CO2 generated per person**| |$ = {round(co2_per_capita, 5)}{u.lps_per_person}$|
+    |**Steady State CO2**| $ {outdoor_co2}{u.ppm} + \\frac{{ {round(co2_per_capita, 5)}{u.lps_per_person}}}{{ {round(vent_per_capita, 2)}{u.lps_per_person}}} \\cdot 10^6 $ | $ = {int(max_co2)}{u.ppm} $|
+    """)
     submitted = st.button('Print')
 
 if submitted:
     form_container.empty()
-    additional = {
-        'Required Outdoor CADR per person': f"{vent_per_capita} L/s",
-        'Total Required CADR per person': f"{total_per_capita} L/s",
-    }
-    display(max_co2, room, additional=additional)
+    display_v2(
+        max_co2, 
+        ("Room:", room),
+        ("Required Outdoor CADR per person:", f"{vent_per_capita} lps"),
+        ("Total Required CADR per person:", f"{total_per_capita} lps"),
+    )
