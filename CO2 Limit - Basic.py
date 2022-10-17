@@ -37,7 +37,7 @@ with form_container.container():
     |-|-|-|
     |**Outdoor airflow per person**| | $ = {vent_per_capita} {u.lps_per_person}$|
     |**CO2 generated per person**| | $ = {round(co2_per_capita, 5)} {u.lps_per_person}$|
-    |**Steady State CO2**|${outdoor_co2}{u.ppm} + \\frac{{ {round(co2_per_capita, 5)}{u.lps_per_person}}} {{ {vent_per_capita}{u.lps_per_person}}} \\cdot 10^6$|$ = {int(max_co2)}{u.ppm}$
+    |**Steady State CO2**|${outdoor_co2}{u.ppm} + \\frac{{ {round(co2_per_capita, 5)}{u.lps_per_person}}} {{ {vent_per_capita}{u.lps_per_person}}} \\cdot {u.mega}$|$ = {int(max_co2)}{u.ppm}$
     """)
 
     submitted = st.button('Print')

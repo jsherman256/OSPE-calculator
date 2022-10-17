@@ -47,7 +47,7 @@ with form_container.container():
     |-|-|-|
     |**Total outdoor airflow**| $ ({vent_params['People Rate']}{u.lps}\\cdot {people}{u.people}) + ({vent_params['Area Rate']}{u.lps} \\cdot {room_size}{u.sq_m}) $ | $ = {round(vent_needed,2)} {u.lps}$|
     |**Total CO2 generated**| $ {co2_gen.loc[age][met]}{u.lps_per_person} \\cdot {people}{u.people} $ | $ = {round(co2_created,5)}{u.lps} $ |
-    |**Steady State CO2**| $ {outdoor_co2}{u.ppm} + \\frac{{{round(co2_created, 5)} {u.lps}}}{{{round(vent_needed,2)}{u.lps}}} \\cdot 10^6 $ | $ = {int(max_co2)}{u.ppm} $ |
+    |**Steady State CO2**| $ {outdoor_co2}{u.ppm} + \\frac{{{round(co2_created, 5)} {u.lps}}}{{{round(vent_needed,2)}{u.lps}}} \\cdot {u.mega} $ | $ = {int(max_co2)}{u.ppm} $ |
     """
     )
 
