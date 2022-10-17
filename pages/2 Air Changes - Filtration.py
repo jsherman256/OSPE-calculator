@@ -2,6 +2,7 @@ import streamlit as st
 from converters import cfm_to_cubic_meters_per_hour, lps_to_cubic_meters_per_hour
 from lib import *
 from converters import *
+import units as u
 
 st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 
@@ -44,6 +45,10 @@ elif volume_unit == 'cubic feet':
 # This *should* always be true, but best to double check
 if volume_m3 > 0:
     ach = max_cadr_m3ph / volume_m3
-    with st.expander("More info"):
-        st.latex(f"ACH = {round(ach,2)} = \\frac{{{round(max_cadr_m3ph,2)} \\frac{{m^3}}{{h}}}}{{{round(volume_m3,2)} m^3}}")
+    st.markdown("### Results")
+    st.markdown(f"""
+    ||||
+    |-|-|-|
+    |**Air Changes per Hour**| $ \\frac{{\\text{{CADR}}}}{{\\text{{Volume}}}} = \\frac{{{round(max_cadr_m3ph,2)} {u.m3ph}}}{{{round(volume_m3,2)} {u.cubic_m}}} $ | $ = {round(ach,2)} $ |
+    """)
     display_ach(ach)
