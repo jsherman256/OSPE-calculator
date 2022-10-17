@@ -2,6 +2,7 @@ import streamlit as st
 from converters import cfm_to_cubic_meters_per_hour, lps_to_cubic_meters_per_hour
 from lib import *
 from converters import *
+import units as u
 
 st.set_page_config(page_title='OSPE Air Quality Calculator', page_icon='💨')
 
@@ -55,10 +56,13 @@ if volume_m3 > 0 and indoor_co2 > outdoor_co2_actual:
     total_vent_lps = vent_per_capita * people
     ach = 3.6 * total_vent_lps / volume_m3
 
-    with st.expander("More info"):
-        st.latex(f"co2_{{\\text{{per capita}}}} = {co2_gen.loc[age][met]}\\text{{ L/s/p}}")
-        st.latex(f"vent_{{\\text{{per capita}}}} = {round(vent_per_capita, 1)}\\text{{ L/s/p}} = \\frac{{{co2_per_capita} \\cdot 10^6 \\text{{ L/s/p}}}}{{{indoor_co2}\\text{{ ppm}} - {outdoor_co2_actual}\\text{{ ppm}}}}")
-        st.latex(f"vent_{{total}} = {round(total_vent_lps, 1)}\\text{{ L/s}} = {round(vent_per_capita, 1)}\\text{{ L/s/p}} \\cdot {people}\\text{{ people}}")
-        st.latex(f"ACH = {round(ach, 2)} = 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}\\text{{ L/s}}}}{{{round(volume_m3, 1)}m^3}}")
-
+    st.markdown("### Results")
+    st.markdown(f"""
+    ||||
+    |-|-|-|
+    |**CO2 generated per person**| | $ = {co2_gen.loc[age][met]}{u.lps_per_person} $|
+    |**Outdoor airflow per person**| $ \\frac{{{co2_per_capita} {u.lps_per_person}}}{{{indoor_co2}{u.ppm} - {outdoor_co2_actual}{u.ppm}}} \\cdot 10^6 $ | $ = {round(vent_per_capita, 1)}{u.lps_per_person} $ |
+    |**Total outdoor airflow**| $ {round(vent_per_capita, 1)}{u.lps_per_person} \\cdot {people}{u.people} $ | $ = {round(total_vent_lps, 1)}{u.lps} $|
+    |**Air changes per hour**| $ 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}{u.lps}}}{{{round(volume_m3, 1)}{u.cubic_m}}} $ | $ = {round(ach, 2)}{u.ach} $ |
+    """)
     display_ach(ach)
