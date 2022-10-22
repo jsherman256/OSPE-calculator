@@ -44,4 +44,11 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display_v2(max_co2, ("Room:" ,room), ("Average Age:", age), ("Activity:", activity))
+    display_v2(
+        max_co2,
+        details={
+            "Room:": room, 
+            "Average Age:": age,
+            "Activity:": activity
+        }
+    )

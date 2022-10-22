@@ -44,6 +44,15 @@ with form_container.container():
     co2_created = co2_gen.loc[age][met] * people
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
 
+    # Air changes needed beyond ventilation
+    extra_ach = round(csa.loc[room]['Total ACH'] - csa.loc[room]['Air Changes per Hour from Ventilation'], 1)
+
+    # Ventilation needed and CO2 readings if ventilation is not the only method of air cleaning
+    vent_only_vent_needed = cubic_meters_per_hour_to_lps(
+        csa.loc[room]['Total ACH'] * 2.7 * room_size
+    )
+    vent_only_co2_limit = outdoor_co2 + co2_created*1000000 / vent_only_vent_needed
+
     st.markdown("### Results")
     st.markdown(f"""
     ||||
@@ -57,8 +66,13 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display_v2(
-        max_co2, 
-        ("Room:", room),
-        ("Required Total Outdoor CADR:", f"{vent_needed} L/s")
+    display_v2_health(
+        max_co2,
+        extra_ach=extra_ach,
+        vent_only_co2_limit=vent_only_co2_limit,
+        outdoor_ach=outdoor_ach_needed,
+        details={
+            "Room:": room,
+            "Required Total Outdoor CADR:": f"{vent_needed} L/s",
+        }
     )

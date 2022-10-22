@@ -49,14 +49,30 @@ def display(max_co2, room_type, additional=None):
     if rerun:
         st.experimental_rerun()
 
-def display_v2(co2, *args):
+def display_v2_health(co2, outdoor_ach, extra_ach, vent_only_co2_limit, details):
+    info_string = f"""OSPE recommends the use of upper room UVGI in healthcare settings. 
+    CO2 level is based on {outdoor_ach} ACH of outdoor air from CSA standard Z317.2-2019. 
+    An additional {extra_ach} air changes per hour are also required. 
+    <b>If ventilation is the only method used, CO2 levels should be {int(vent_only_co2_limit)}.</b>
+    Upper room UVGI systems will exceed these requirements."""
+    display_v2(co2, details, info_string)
+
+def display_v2(co2, details, info_string = None):
     st.markdown(f"<center><span style='font-size:35px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
     st.markdown(f"<center><span style='font-size:150px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
     st.markdown("<br><br>", unsafe_allow_html=True)
-    for (k,v) in args:
+    for (k,v) in details.items():
         st.markdown(f"<span style='font-size:20px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
-    st.markdown("""
-    <hr>
+    if info_string:
+        st.markdown(f"""
+        <br>
+        <span style='font-size:12px;'>
+        {info_string}
+        </span>
+        <br>
+        """, unsafe_allow_html=True)
+    st.markdown(f"""
+    <br>
     <span style='font-size:12px;'>
     This is the expected maximum CO2 level when the room is used as described. 
     Having higher activity levels could lead to higher CO2 levels. 

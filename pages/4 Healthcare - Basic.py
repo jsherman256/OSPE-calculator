@@ -32,6 +32,11 @@ with form_container.container():
     co2_per_capita = co2_gen.loc[age][met]
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
 
+    # Extra info
+    extra_ach = round(csa.loc[room]['Total ACH'] - csa.loc[room]['Air Changes per Hour from Ventilation'], 1)
+    vent_only_vent_per_capita = total_per_capita
+    vent_only_co2_limit = outdoor_co2 + co2_per_capita*1000000 / vent_only_vent_per_capita
+
     st.markdown("### Results")
     st.markdown(f"""
     ||||
@@ -44,9 +49,14 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display_v2(
+    display_v2_health(
         max_co2, 
-        ("Room:", room),
-        ("Required Outdoor CADR per person:", f"{vent_per_capita} lps"),
-        ("Total Required CADR per person:", f"{total_per_capita} lps"),
+        extra_ach=extra_ach,
+        outdoor_ach=csa.loc[room]['Air Changes per Hour from Ventilation'],
+        vent_only_co2_limit=vent_only_co2_limit,
+        details={
+            "Room:": room,
+            "Required Outdoor CADR per person:": f"{vent_per_capita} lps",
+            "Total Required CADR per person:": f"{total_per_capita} lps"
+        }
     )
