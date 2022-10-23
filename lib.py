@@ -53,7 +53,7 @@ def display_v2_health(co2, outdoor_ach, extra_ach, vent_only_co2_limit, details)
     info_string = f"""OSPE recommends the use of upper room UVGI in healthcare settings. 
     CO2 level is based on {outdoor_ach} ACH of outdoor air from CSA standard Z317.2-2019. 
     An additional {extra_ach} air changes per hour are also required. 
-    <b>If ventilation is the only method used, CO2 levels should be {int(vent_only_co2_limit)}.</b>
+    <b>If ventilation is the only method used, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b>
     Upper room UVGI systems will exceed these requirements."""
     display_v2(co2, details, info_string)
 
@@ -63,14 +63,6 @@ def display_v2(co2, details, info_string = None):
     st.markdown("<br><br>", unsafe_allow_html=True)
     for (k,v) in details.items():
         st.markdown(f"<span style='font-size:20px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
-    if info_string:
-        st.markdown(f"""
-        <br>
-        <span style='font-size:12px;'>
-        {info_string}
-        </span>
-        <br>
-        """, unsafe_allow_html=True)
     st.markdown(f"""
     <br>
     <span style='font-size:12px;'>
@@ -78,7 +70,14 @@ def display_v2(co2, details, info_string = None):
     Having higher activity levels could lead to higher CO2 levels. 
     CO2 sensors can have errors on the order of 50 ppm. 
     If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with current ventilation requirements.
-    </span>""", unsafe_allow_html=True)
+    </span><br>""", unsafe_allow_html=True)
+    if info_string:
+        st.markdown(f"""
+        <br>
+        <span style='font-size:12px;'>
+        {info_string}
+        </span>
+        """, unsafe_allow_html=True)
     rerun = st.button('Rerun')
 
     if rerun:
