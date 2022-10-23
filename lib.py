@@ -50,7 +50,7 @@ def display(max_co2, room_type, additional=None):
         st.experimental_rerun()
 
 def display_v2_health(co2, outdoor_ach, extra_ach, vent_only_co2_limit, details):
-    info_string = f"""OSPE recommends the use of upper room UVGI in healthcare settings. 
+    info_string = f"""OSPE Indoor Air Quality Advisory Group recommends the use of upper room UVGI in healthcare settings. 
     CO2 level is based on {outdoor_ach} ACH of outdoor air from CSA standard Z317.2-2019. 
     An additional {extra_ach} air changes per hour are also required. 
     <b>If ventilation is the only method used, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b>
