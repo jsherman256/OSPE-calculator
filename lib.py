@@ -78,6 +78,7 @@ def display_v2(co2, details, info_string = None):
         {info_string}
         </span>
         """, unsafe_allow_html=True)
+    st.markdown("<hr>", unsafe_allow_html=True)
     rerun = st.button('Rerun')
 
     if rerun:
