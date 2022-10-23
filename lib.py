@@ -77,7 +77,7 @@ def display_v2(co2, details, info_string = None):
     This is the expected maximum CO2 level when the room is used as described. 
     Having higher activity levels could lead to higher CO2 levels. 
     CO2 sensors can have errors on the order of 50 ppm. 
-    If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with modern ventilation requirements.
+    If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with current ventilation requirements.
     </span>""", unsafe_allow_html=True)
     rerun = st.button('Rerun')
 
