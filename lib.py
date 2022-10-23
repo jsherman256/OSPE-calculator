@@ -59,7 +59,7 @@ def display_v2_health(co2, outdoor_ach, extra_ach, vent_only_co2_limit, details)
 
 def display_v2(co2, details, info_string = None):
     st.markdown(f"<center><span style='font-size:35px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
-    st.markdown(f"<center><span style='font-size:150px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><span style='font-size:150px;'>{int(co2)} ppm</span></center>", unsafe_allow_html=True)
     st.markdown("<br><br>", unsafe_allow_html=True)
     for (k,v) in details.items():
         st.markdown(f"<span style='font-size:20px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
