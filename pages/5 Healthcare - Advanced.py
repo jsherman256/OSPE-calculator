@@ -43,6 +43,7 @@ with form_container.container():
 
     co2_created = co2_gen.loc[age][met] * people
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
+    co2_half_cap = (max_co2 + outdoor_co2) / 2
 
     # Air changes needed beyond ventilation
     extra_ach = round(csa.loc[room]['Total ACH'] - csa.loc[room]['Air Changes per Hour from Ventilation'], 1)
@@ -68,6 +69,7 @@ if submitted:
     form_container.empty()
     display_v2_health(
         max_co2,
+        co2_half_cap,
         extra_ach=extra_ach,
         vent_only_co2_limit=vent_only_co2_limit,
         outdoor_ach=outdoor_ach_needed,

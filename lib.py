@@ -49,15 +49,15 @@ def display(max_co2, room_type, additional=None):
     if rerun:
         st.experimental_rerun()
 
-def display_v2_health(co2, outdoor_ach, extra_ach, vent_only_co2_limit, details):
+def display_v2_health(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):
     info_string = f"""OSPE Indoor Air Quality Advisory Group recommends the use of upper room UVGI in healthcare settings. 
     CO2 level is based on {outdoor_ach} ACH of outdoor air from CSA standard Z317.2-2019. 
     An additional {extra_ach} air changes per hour are also required. 
     <b>If ventilation is the only method used, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b>
     Upper room UVGI systems will exceed these requirements."""
-    display_v2(co2, details, info_string)
+    display_v2(co2, co2_half_cap, details, info_string)
 
-def display_v2(co2, details, info_string = None):
+def display_v2(co2, co2_half_cap, details, info_string = None):
     st.markdown(f"<center><span style='font-size:35px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
     st.markdown(f"<center><span style='font-size:150px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -67,6 +67,7 @@ def display_v2(co2, details, info_string = None):
     <br>
     <span style='font-size:12px;'>
     This is the expected maximum CO2 level when the room is used as described. 
+    If the room is at half capacity, expected CO2 levels would be {int(co2_half_cap)} ppm. 
     Having higher activity levels could lead to higher CO2 levels. 
     CO2 sensors can have errors on the order of 50 ppm. 
     If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with current ventilation requirements.

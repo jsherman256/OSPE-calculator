@@ -31,6 +31,7 @@ with form_container.container():
     total_per_capita = csa.loc[room]['Total People Rate (lps/person)']
     co2_per_capita = co2_gen.loc[age][met]
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
+    co2_half_cap = (max_co2 + outdoor_co2) / 2
 
     # Extra info
     extra_ach = round(csa.loc[room]['Total ACH'] - csa.loc[room]['Air Changes per Hour from Ventilation'], 1)
@@ -50,7 +51,8 @@ with form_container.container():
 if submitted:
     form_container.empty()
     display_v2_health(
-        max_co2, 
+        max_co2,
+        co2_half_cap,
         extra_ach=extra_ach,
         outdoor_ach=csa.loc[room]['Air Changes per Hour from Ventilation'],
         vent_only_co2_limit=vent_only_co2_limit,

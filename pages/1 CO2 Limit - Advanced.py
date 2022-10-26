@@ -40,6 +40,7 @@ with form_container.container():
 
     co2_created = co2_gen.loc[age][met] * people
     max_co2 = outdoor_co2 + co2_created*1000000 / vent_needed
+    co2_half_cap = (max_co2 + outdoor_co2) / 2
 
     st.markdown("### Results")
     st.markdown(f"""
@@ -57,6 +58,7 @@ if submitted:
     form_container.empty()
     display_v2(
         max_co2,
+        co2_half_cap,
         details={
             "Room:": room, 
             "Average Age:": age,

@@ -30,6 +30,7 @@ with form_container.container():
     vent_per_capita = vent.loc[room]['Total People Rate (lps/person)']
     co2_per_capita = co2_gen.loc[age][met]
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
+    co2_half_cap = (max_co2 + outdoor_co2) / 2
 
     st.markdown("### Results")
     st.markdown(f"""
@@ -46,6 +47,7 @@ if submitted:
     form_container.empty()
     display_v2(
         max_co2,
+        co2_half_cap,
         details={
             "Room:": room, 
             "Average Age:": age,
