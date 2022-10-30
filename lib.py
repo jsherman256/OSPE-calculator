@@ -28,6 +28,10 @@ csa = (
     pd
     .read_csv('CSA_Healthcare_Values.csv', index_col=0)
 )
+residential = (
+    pd
+    .read_csv('residential.csv', index_col=0)
+)
 
 # Look up the ordinal index for the default selectbox values
 default_room = vent.index.get_loc("Educational Facilities - Classrooms (Ages 9+)")
