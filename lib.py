@@ -53,6 +53,10 @@ def display(max_co2, room_type, additional=None):
     if rerun:
         st.experimental_rerun()
 
+def display_v2_residential(co2, co2_half_cap, details):
+    info_string = """Health Canada recommends maintaining the average CO2 level in your home below 1000 ppm."""
+    display_v2(co2, co2_half_cap, details, info_string)
+
 def display_v2_std(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):
     info_string = f"""OSPE Indoor Air Quality Advisory Group (IAQAG) recommends 6 air changes per hour (ACH). 
     The ventilation rate from ASHRAE 62.1 is {round(outdoor_ach, 1)} ACH."""

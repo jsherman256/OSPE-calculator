@@ -67,7 +67,7 @@ if submitted:
         details[f"Ages {age_b}:"] = f"{people_count_b} people"
     if people_count_c > 0:
         details[f"Ages {age_c}:"] = f"{people_count_c} people"
-    display_v2(
+    display_v2_residential(
         max_co2,
         co2_half_cap,
         details
