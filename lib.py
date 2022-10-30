@@ -49,6 +49,15 @@ def display(max_co2, room_type, additional=None):
     if rerun:
         st.experimental_rerun()
 
+def display_v2_std(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):
+    info_string = f"""OSPE Indoor Air Quality Advisory Group (IAQAG) recommends 6 air changes per hour (ACH). 
+    The ventilation rate from ASHRAE 62.1 is {round(outdoor_ach, 1)} ACH."""
+    if extra_ach > 0:
+        info_string += f"""An additional {round(extra_ach, 1)} ACH are required to comply with OSPE IAQAG recommendations. 
+        <b>If ventilation is the only method used to achieve 6 ACH, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b> 
+        Additional air changes can be achieved through ventilation, filtration or ultraviolet germicidal irradiation"""
+    display_v2(co2, co2_half_cap, details, info_string)
+
 def display_v2_health(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):
     info_string = f"""OSPE Indoor Air Quality Advisory Group recommends the use of upper room UVGI in healthcare settings. 
     CO2 level is based on {outdoor_ach} ACH of outdoor air from CSA standard Z317.2-2019. 
