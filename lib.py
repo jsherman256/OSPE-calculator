@@ -53,13 +53,13 @@ def display(max_co2, room_type, additional=None):
     if rerun:
         st.experimental_rerun()
 
-def display_v2_residential(co2, co2_half_cap, details):
+def display_v2_residential(co2, details):
     info_string = """Health Canada recommends maintaining the average CO2 level in your home below 1000 ppm."""
-    display_v2(co2, co2_half_cap, details, info_string)
+    display_v2(co2, None, details, info_string, activity_warning=False)
 
 def display_v2_std(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):
     info_string = f"""OSPE Indoor Air Quality Advisory Group (IAQAG) recommends 6 air changes per hour (ACH). 
-    The ventilation rate from ASHRAE 62.1 is {round(outdoor_ach, 1)} ACH."""
+    The ventilation rate from ASHRAE 62.1 is {round(outdoor_ach, 1)} ACH. """
     if extra_ach > 0:
         info_string += f"""An additional {round(extra_ach, 1)} ACH are required to comply with OSPE IAQAG recommendations. 
         <b>If ventilation is the only method used to achieve 6 ACH, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b> 
@@ -74,21 +74,26 @@ def display_v2_health(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_l
     Upper room UVGI systems will exceed these requirements."""
     display_v2(co2, co2_half_cap, details, info_string)
 
-def display_v2(co2, co2_half_cap, details, info_string = None):
+def display_v2(co2, co2_half_cap, details, info_string = None, activity_warning=True):
     st.markdown(f"<center><span style='font-size:35px;'>Expected Steady State CO2</span></center>", unsafe_allow_html=True)
     st.markdown(f"<center><span style='font-size:150px;'>{int(co2)}</span></center>", unsafe_allow_html=True)
     st.markdown("<br><br>", unsafe_allow_html=True)
     for (k,v) in details.items():
         st.markdown(f"<span style='font-size:20px;'><strong>{k}</strong> {v}</span>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <br>
-    <span style='font-size:12px;'>
-    This is the expected maximum CO2 level when the room is used as described. 
-    If the room is at half capacity, expected CO2 levels would be {int(co2_half_cap)} ppm. 
-    Having higher activity levels could lead to higher CO2 levels. 
-    CO2 sensors can have errors on the order of 50 ppm. 
+    
+    disclaimer = ""
+    if activity_warning:
+        disclaimer += "This is the expected maximum CO2 level when the room is used as described. "
+    if co2_half_cap:
+        disclaimer += f"If the room is at half capacity, expected CO2 levels would be {int(co2_half_cap)} ppm. "
+    if activity_warning:
+        disclaimer += "Having higher activity levels could lead to higher CO2 levels. "
+
+    disclaimer += f"""CO2 sensors can have errors on the order of 50 ppm. 
     If the room is consistently above the expected steady state CO2, the ventilation should be investigated or increased as the room is not in compliance with current ventilation requirements.
-    </span><br>""", unsafe_allow_html=True)
+    """
+    st.markdown(f"<br><span style='font-size:12px;'>{disclaimer}</span><br>", unsafe_allow_html=True)
+
     if info_string:
         st.markdown(f"""
         <br>

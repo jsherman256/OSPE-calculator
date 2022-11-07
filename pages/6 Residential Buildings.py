@@ -69,6 +69,5 @@ if submitted:
         details[f"Ages {age_c}:"] = f"{people_count_c} people"
     display_v2_residential(
         max_co2,
-        co2_half_cap,
         details
     )
