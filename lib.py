@@ -63,7 +63,7 @@ def display_v2_std(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limi
     if extra_ach > 0:
         info_string += f"""An additional {round(extra_ach, 1)} ACH are required to comply with OSPE IAQAG recommendations. 
         <b>If ventilation is the only method used to achieve 6 ACH, CO2 levels should be {int(vent_only_co2_limit)} ppm.</b> 
-        Additional air changes can be achieved through ventilation, filtration or ultraviolet germicidal irradiation"""
+        Additional air changes can be achieved through ventilation, filtration or ultraviolet germicidal irradiation."""
     display_v2(co2, co2_half_cap, details, info_string)
 
 def display_v2_health(co2, co2_half_cap, outdoor_ach, extra_ach, vent_only_co2_limit, details):

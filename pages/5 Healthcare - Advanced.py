@@ -75,6 +75,6 @@ if submitted:
         outdoor_ach=outdoor_ach_needed,
         details={
             "Room:": room,
-            "Required Total Outdoor CADR:": f"{vent_needed} L/s",
+            "Required Total Outdoor CADR:": f"{round(vent_needed,2)} L/s",
         }
     )

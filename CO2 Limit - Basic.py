@@ -32,6 +32,10 @@ with form_container.container():
     max_co2 = outdoor_co2 + co2_per_capita*1000000 / vent_per_capita
     co2_half_cap = (max_co2 + outdoor_co2) / 2
 
+    outdoor_ach = vent.loc[room]['ACH']
+    extra_ach = 6 - outdoor_ach
+    vent_only_co2_limit = outdoor_co2 + co2_per_capita * 1000000 / (vent_per_capita*(6/outdoor_ach))
+
     st.markdown("### Results")
     st.markdown(f"""
     ||||
@@ -45,9 +49,12 @@ with form_container.container():
 
 if submitted:
     form_container.empty()
-    display_v2(
+    display_v2_std(
         max_co2,
         co2_half_cap,
+        outdoor_ach,
+        extra_ach,
+        vent_only_co2_limit,
         details={
             "Room:": room, 
             "Average Age:": age,
