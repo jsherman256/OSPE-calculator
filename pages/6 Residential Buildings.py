@@ -29,7 +29,7 @@ with form_container.container():
         people_count_c = st.number_input(label="Number People", min_value=0, step=1, key="num_people_c")
     with right:
         age_a = st.selectbox(label="Age", options=co2_gen.index, index=co2_gen.index.get_loc("30 to <40"), key="age_a")
-        age_b = st.selectbox(label="Age", options=co2_gen.index, index=co2_gen.index.get_loc("16 to < 21"), key="age_b", disabled=(people_count_b == 0))
+        age_b = st.selectbox(label="Age", options=co2_gen.index, index=co2_gen.index.get_loc("16 to <21"), key="age_b", disabled=(people_count_b == 0))
         age_c = st.selectbox(label="Age", options=co2_gen.index, index=co2_gen.index.get_loc("3 to <6"), key="age_c", disabled=(people_count_c == 0))
 
     # Assume Met of 1.3
