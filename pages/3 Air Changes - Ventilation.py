@@ -60,8 +60,8 @@ if volume_m3 > 0 and indoor_co2 > outdoor_co2_actual:
     st.markdown(f"""
     ||||
     |-|-|-|
-    |**CO2 generated per person**| | $ = {co2_gen.loc[age][met]}{u.lps_per_person} $|
-    |**Outdoor airflow per person**| $ \\frac{{{co2_per_capita} {u.lps_per_person}}}{{{indoor_co2}{u.ppm} - {outdoor_co2_actual}{u.ppm}}} \\cdot {u.mega} $ | $ = {round(vent_per_capita, 1)}{u.lps_per_person} $ |
+    |**CO2 generated per person**| | $ = {round(co2_gen.loc[age][met], 5)}{u.lps_per_person} $|
+    |**Outdoor airflow per person**| $ \\frac{{{round(co2_per_capita, 5)} {u.lps_per_person}}}{{{indoor_co2}{u.ppm} - {outdoor_co2_actual}{u.ppm}}} \\cdot {u.mega} $ | $ = {round(vent_per_capita, 1)}{u.lps_per_person} $ |
     |**Total outdoor airflow**| $ {round(vent_per_capita, 1)}{u.lps_per_person} \\cdot {people}{u.people} $ | $ = {round(total_vent_lps, 1)}{u.lps} $|
     |**Air changes per hour**| $ 3.6 \\cdot \\frac{{{round(total_vent_lps, 1)}{u.lps}}}{{{round(volume_m3, 1)}{u.cubic_m}}} $ | $ = {round(ach, 2)}{u.ach} $ |
     """)

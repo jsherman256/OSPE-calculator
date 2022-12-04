@@ -22,8 +22,10 @@ co2_gen = (
 co2_gen.columns = co2_gen.columns.astype(float)
 activities = (
     pd
-    .read_csv('Activity-Met.csv', index_col=0)
+    .read_csv('Activity-Met.csv')
 )
+activities.Activity = activities.apply(lambda x: f"{x.Activity} - Met {x.Met}", axis=1)
+activities = activities.set_index('Activity')
 csa = (
     pd
     .read_csv('CSA_Healthcare_Values.csv', index_col=0)
@@ -36,10 +38,10 @@ residential = (
 # Look up the ordinal index for the default selectbox values
 default_room = vent.index.get_loc("Educational Facilities - Classrooms (Ages 9+)")
 default_age = co2_gen.index.get_loc("6 to <11")
-default_activity = activities.index.get_loc("Sitting tasks, light effort (office work)")
+default_activity = activities.index.get_loc("Sitting tasks, light effort (office work) - Met 1.5")
 
 default_health_age = co2_gen.index.get_loc("30 to <40")
-default_health_activity = activities.index.get_loc("Standing quietly")
+default_health_activity = activities.index.get_loc("Standing quietly - Met 1.3")
 
 def display(max_co2, room_type, additional=None):
     st.markdown(f"<center><span style='font-size:70px;'>Maximum CO2</span></center>", unsafe_allow_html=True)
