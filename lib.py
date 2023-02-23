@@ -126,3 +126,9 @@ def display_ach(ach):
     st.markdown(f"<center><h1>{ach} ACH</h1></center>", unsafe_allow_html=True)
     st.markdown(f"<center><h1>{rating}</h1></center>", unsafe_allow_html=True)
     
+def display_cadr(cadr_lps):
+    # If within ±0.1 of an integer, just show the integer portion
+    # Otherwise, round to the nearest 0.1
+    cadr_lps = int(cadr_lps) if (abs(int(cadr_lps) - cadr_lps) < .1) else round(cadr_lps, 1)
+
+    st.markdown(f"<center><h1>{cadr_lps} lps</h1></center>", unsafe_allow_html=True)
