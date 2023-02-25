@@ -63,7 +63,6 @@ with from_percent:
     with middle_left:
         control_percent = st.number_input("Control %", min_value=0, max_value=100, value=0)
     with middle_right:
-        # TODO what units are volume measured in?
         chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0)
     with right:
         test_time = st.number_input("Test duration (min)", min_value=0)
@@ -85,5 +84,38 @@ with from_percent:
         ||||
         |-|-|-|
         |**CADR**| $ \\frac{{\\text{{volume}}}}{{\\text{{time}}}} \\cdot {u.min_per_hour} \\cdot \\ln\\left({{\\frac{{1 - \\text{{c}}}}{{1 - \\text{{t}}}}}}\\right) \\cdot {u.m3ph_over_lps} $ | $ = \\frac{{{chamber_volume} {u.cubic_m}}}{{{test_time} {u.minutes}}} \\cdot {u.min_per_hour} \\cdot \\ln\\left({{\\frac{{{round(1 - (control_percent / 100), 2)}}}{{{round(1 - (test_percent / 100), 2)}}}}}\\right) \\cdot {u.m3ph_over_lps} $ |""")
+
+        display_cadr(cadr_lps)
+
+with from_log:
+    st.markdown("### Calculate CADR from log Reduction")
+    left, middle_left, middle_right, right = st.columns(4)
+    with left:
+        test_log = st.number_input("Test log reduction", min_value=0.0, value=2.0, step=0.1)
+    with middle_left:
+        control_log = st.number_input("Control log reduction", min_value=0.0, value=0.0, step=0.1)
+    with middle_right:
+        chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0, key="log_chamber_volume")
+    with right:
+        test_time = st.number_input("Test duration (min)", min_value=0, key="log_test_time")
+
+    # TODO is this an error?
+    if round(control_log, 1) > round(test_log, 1):
+        st.error("Control log reduction is higher than test reduction. Please check the values")
+    elif chamber_volume == 0 or test_time == 0:
+        st.error("The effectiveness cannot be calculated without the volume of the chamber and the duration of test.")
+    else:
+        # Convert CADR to Liters per second
+        # 1000 Liters in a cubic meter. 3600 seconds in an hour
+        cadr_lps = (chamber_volume / test_time) * math.log(10**(test_log - control_log)) * 60 * (1000 / 3600)
+
+        st.markdown("### Results")
+        if control_log == 0:
+            st.warning("Since it is unknown how much is removed when the unit is off (control log reduction), the actual CADR is likely to be less than shown here")
+
+        st.markdown(f"""
+        ||||
+        |-|-|-|
+        |**CADR**| $ \\frac{{\\text{{volume}}}}{{\\text{{time}}}} \\cdot {u.min_per_hour} \\cdot \\ln\\left({{10^{{t-c}}}}\\right) \\cdot {u.m3ph_over_lps} $ | $ = \\frac{{{chamber_volume} {u.cubic_m}}}{{{test_time} {u.minutes}}} \\cdot {u.min_per_hour} \\cdot \\ln\\left({{10^{{{round(test_log, 1)} - {round(control_log, 1)}}}}}\\right) \\cdot {u.m3ph_over_lps} $ |""")
 
         display_cadr(cadr_lps)
