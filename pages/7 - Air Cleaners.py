@@ -28,10 +28,19 @@ with from_ach:
         rated_ach = st.number_input(label='ACH', step=1, min_value=1, value=2)
     with middle_left:
         volume_known = st.checkbox(label='Room Volume Known', value=False)
-    with middle_right:
-        room_volume = st.number_input(label='Room Volume', step=1, min_value=1, value=10, disabled=(not volume_known))
+    # N.B. out-of-order
     with right:
         volume_unit = st.selectbox(label='Volume Unit', options=['cubic meters', 'cubic feet'])
+    with middle_right:
+        room_volume = st.number_input(
+            label='Room Volume',
+            min_value=1.0,
+            value=10.0,
+            disabled=(not volume_known),
+            step=0.01 if volume_unit == 'cubic meters' else 0.1,
+            format="%.2f" if volume_unit == 'cubic meters' else "%.1f"
+        )
+
 
     # Convert room volume to cubic meters
     if volume_unit == 'cubic meters':
@@ -59,13 +68,13 @@ with from_percent:
     st.markdown("### Calculate CADR from % Reduction")
     left, middle_left, middle_right, right = st.columns(4)
     with left:
-        test_percent = st.number_input("Test %", min_value=0, max_value=100, value=80)
+        test_percent = st.number_input("Test %", min_value=0.0, max_value=100.0, value=80.0, step=0.0001, format="%.4f")
     with middle_left:
-        control_percent = st.number_input("Control %", min_value=0, max_value=100, value=0)
+        control_percent = st.number_input("Control %", min_value=0.0, max_value=100.0, value=0.0, step=0.0001, format="%.4f")
     with middle_right:
-        chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0)
+        chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0.0, step=0.01)
     with right:
-        test_time = st.number_input("Test duration (min)", min_value=0)
+        test_time = st.number_input("Test duration (min)", min_value=0.0, step=0.1, format="%.1f")
 
     if control_percent > test_percent:
         st.error("Control % reduction is higher than test reduction. Please check the values")
@@ -91,13 +100,13 @@ with from_log:
     st.markdown("### Calculate CADR from log Reduction")
     left, middle_left, middle_right, right = st.columns(4)
     with left:
-        test_log = st.number_input("Test log reduction", min_value=0.0, value=2.0, step=0.1)
+        test_log = st.number_input("Test log reduction", min_value=0.0, value=2.0, step=0.1, format="%.1f")
     with middle_left:
-        control_log = st.number_input("Control log reduction", min_value=0.0, value=0.0, step=0.1)
+        control_log = st.number_input("Control log reduction", min_value=0.0, value=0.0, step=0.1, format="%.1f")
     with middle_right:
-        chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0, key="log_chamber_volume")
+        chamber_volume = st.number_input(f"Volume of chamber (m³)", min_value=0.0, key="log_chamber_volume", step=0.01, format="%.2f")
     with right:
-        test_time = st.number_input("Test duration (min)", min_value=0, key="log_test_time")
+        test_time = st.number_input("Test duration (min)", min_value=0.0, step=0.1, key="log_test_time", format="%.1f")
 
     # TODO is this an error?
     if round(control_log, 1) > round(test_log, 1):
